@@ -47,7 +47,7 @@ export function register(formdata, router) {
             // console.log("register", data);
 
             dispatch(auth_addUserToLocalstorage(data));
-            // router.push('/');
+            router.push('/');
 
         } catch (err) {
             console.log("error in register ", err);
