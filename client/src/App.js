@@ -22,7 +22,7 @@ function App() {
   });
 
   const user = JSON.parse(localStorage.getItem('profile'));
-
+  // console.log('user: ',user);
   return (
     <BrowserRouter>
       <Container maxWidth="xl">
@@ -32,7 +32,7 @@ function App() {
           <Route path="/posts" exact component={Home} />
           <Route path="/posts/search" exact component={Home} />
           <Route path="/posts/:id" component={PostDetails} />
-          <Route path="/auth" exact component={() => (!user ? <Auth /> : <Redirect to="/posts/" />)} />
+          <Route path="/auth" exact component={() => (user==null ? <Auth /> : <Redirect to="/posts/" />)} />
           <Route path="/profile/:user" exact component={Profile} />
         </Switch>
       </Container>

@@ -43,7 +43,7 @@ export const register = async (req, res) => {
 
     const result = await user.save();
 
-    const token = jwt.sign({ email: result.email, id: result._id }, process.env.SECRET_KEY, { expiresIn: "1h" });
+    const token = jwt.sign({ name: result.name, email: result.email, id: result._id }, process.env.SECRET_KEY);
 
     res.status(201).json({ result, token });
 
@@ -68,6 +68,7 @@ export const follow = async (req, res) => {
 
     const user = await UserModal.find({ name: userwantstofollow });
     const user2 = await UserModal.find({ name: usertofollow });
+
     const x = user[0].followings.find((x) => x == usertofollow);
 
     if (user2.length == 0) {
@@ -76,6 +77,7 @@ export const follow = async (req, res) => {
       res.send('user you cannot follow yourself');
     } else if (!x && user2.length != 0) {
       //change the followings: 
+
       user[0].followings = [...user[0].followings, usertofollow];
       const Updateuser = new UserModal(user[0]);
       const updatedUser = await Updateuser.save();
